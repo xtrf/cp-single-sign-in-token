@@ -95,10 +95,25 @@
       var errorHandler = function(jqXHR) {
         $('.js-error-handler')
           .html(function() {
+            if (jqXHR.status === 0) {
+              return [
+                '<strong>Error</strong>', '<br>',
+                'Unreachable XTRF Url. Try check spelling, your HTTPS certificates, DNS etc.',
+              ].join(' ');
+            }
+
+            if (typeof jqXHR.responseJSON !== 'undefined') {
+              return [
+                '<strong>', jqXHR.status, jqXHR.statusText, '</strong>',
+                '<br>',
+                jqXHR.responseJSON.errorMessage
+              ].join(' ');
+            }
+
             return [
-              '<strong>', jqXHR.status, '</strong> ',
-              jqXHR.statusText
-            ].join('');
+              '<strong>', jqXHR.status, '</strong>',
+              jqXHR.statusText,
+            ].join(' ');
           })
           .show();
       };
