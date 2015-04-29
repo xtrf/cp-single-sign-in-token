@@ -27,11 +27,11 @@
 
             <div class="form-group">
               <label
-                for="hostname">
+                for="xtrfUrl">
                 XTRF Url</label>
 
               <input
-                name="hostname"
+                name="xtrfUrl"
                 type="text"
                 class="form-control"
                 placeholder="https://localhost:8443">
@@ -177,12 +177,15 @@
       $('.js-check-session').on('click', function(event) {
         event.preventDefault();
 
+        var parser = document.createElement('a');
+
         var data = {
           accessToken: $('[name="accessToken"]').val(),
           loginOrEmail: $('[name="loginOrEmail"]').val()
         };
 
-        XTRF_URL = $('[name="hostname"]').val();
+        parser.href = $('[name="xtrfUrl"]').val();
+        XTRF_URL = parser.protocol + '//' + parser.host;
 
         $('.js-error-handler').hide();
         $('.js-dump-data').hide();
