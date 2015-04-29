@@ -137,7 +137,7 @@
         customer: {
           systemSession: function(data) {
             return $.ajax({
-              url: XTRF_URL + '/xtrf-api-rest/system/session',
+              url: XTRF_URL + '/customer-api/system/session',
               type: 'GET',
 
               // Response is expected to be json
@@ -153,7 +153,7 @@
 
           systemLoginWithToken: function(data) {
             return $.ajax({
-              url: XTRF_URL + '/xtrf-api-rest/system/loginWithToken',
+              url: XTRF_URL + '/customer-api/system/loginWithToken',
               type: 'POST',
 
               // Response is expected to be json
