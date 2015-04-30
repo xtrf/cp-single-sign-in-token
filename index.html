@@ -123,6 +123,10 @@
           .show();
       };
 
+      $.ajaxSetup({
+        error: errorHandler
+      });
+
       var api = {
         home: {
           customersPersonsAccessToken: function(data) {
@@ -149,8 +153,7 @@
               data: JSON.stringify({
                 loginOrEmail: data.loginOrEmail
               })
-            })
-            .error(errorHandler);
+            });
           }
         },
 
@@ -167,8 +170,7 @@
               xhrFields: {
                 withCredentials: true
               },
-            })
-            .error(errorHandler);
+            });
           },
 
           systemLoginWithToken: function(data) {
@@ -187,8 +189,8 @@
               xhrFields: {
                 withCredentials: true
               },
-            })
-            .error(errorHandler);
+            });
+          },
           }
         }
       };
