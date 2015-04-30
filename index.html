@@ -191,6 +191,17 @@
               },
             });
           },
+
+          systemLogout: function(data) {
+            return $.ajax({
+              url: XTRF_URL + '/customer-api/system/logout',
+              type: 'GET',
+
+              // Enable cross-domain requests
+              xhrFields: {
+                withCredentials: true
+              }
+            });
           }
         }
       };
@@ -217,7 +228,12 @@
             api.customer.systemLoginWithToken(data)
               .success(function(data) {
                 api.customer.systemSession(data)
-                  .success(dumpData);
+                  .success(function(data) {
+                    dumpData(data);
+
+                    // Logout after done
+                    api.customer.systemLogout();
+                  });
               });
           });
       });
